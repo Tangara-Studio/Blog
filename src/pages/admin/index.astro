@@ -1,0 +1,10 @@
+---
+// En desarrollo, Astro no sirve archivos de public/ en rutas dinámicas
+// Este archivo redirige a la ubicación real del admin de Decap CMS
+if (import.meta.env.DEV) {
+  return Astro.redirect('/admin/index.html', 307);
+}
+// En producción, Astro copia public/ al root de dist/
+// Por lo que este archivo no debería generarse
+return new Response(null, { status: 404 });
+---

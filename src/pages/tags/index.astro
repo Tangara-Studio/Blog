@@ -1,0 +1,108 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Obtener todos los posts publicados
+const allPosts = await getCollection('blog', ({ data }) => {
+  return data.draft !== true;
+});
+
+// Extraer todos los tags únicos
+const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
+
+// Contar posts por tag
+const tagCounts = allTags.map(tag => ({
+  name: tag,
+  count: allPosts.filter(post => post.data.tags.includes(tag)).length
+})).sort((a, b) => b.count - a.count);
+---
+
+<Layout 
+  title="Tags - Tangara Studio Blog"
+  description="Explora posts por categorías y tags"
+>
+  <div class="tags-page">
+    <header class="page-header">
+      <h1>Explorar por Tags</h1>
+      <p>Encuentra posts organizados por temática</p>
+    </header>
+    
+    <div class="tags-grid">
+      {tagCounts.map(({ name, count }) => (
+        <a href={`/tags/${name}`} class="tag-card">
+          <span class="tag-name">{name}</span>
+          <span class="tag-count">{count} {count === 1 ? 'post' : 'posts'}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .tags-page {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .page-header h1 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .page-header p {
+    color: var(--color-text-light);
+    font-size: 1.125rem;
+  }
+  
+  .tags-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .tag-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  
+  .tag-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tag-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    text-transform: capitalize;
+  }
+  
+  .tag-count {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+  }
+  
+  @media (max-width: 768px) {
+    .tags-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .tag-card {
+      padding: 1.5rem 1rem;
+    }
+  }
+</style>

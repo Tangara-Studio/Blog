@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+// Obtener todos los posts publicados
+const allPosts = await getCollection('blog', ({ data }) => {
+  return data.draft !== true;
+});
+
+// Ordenar por fecha (más reciente primero)
+const sortedPosts = allPosts.sort((a, b) => 
+  b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout 
+  title="Tangara Studio Blog - Devlogs y noticias de videojuegos"
+  description="Blog oficial de Tangara Studio. Devlogs, actualizaciones y contenido sobre el desarrollo de nuestros videojuegos."
+>
+  <div class="hero">
+    <h1>Blog de Tangara Studio</h1>
+    <p class="hero-description">
+      Devlogs, noticias y contenido sobre el desarrollo de nuestros videojuegos
+    </p>
+  </div>
+  
+  <div class="posts-grid">
+    {sortedPosts.map((post) => (
+      <PostCard post={post} />
+    ))}
+  </div>
+  
+  {sortedPosts.length === 0 && (
+    <div class="no-posts">
+      <p>No hay posts publicados todavía. ¡Vuelve pronto!</p>
+    </div>
+  )}
+</Layout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .hero-description {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  
+  .no-posts {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--color-text-light);
+  }
+  
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .hero-description {
+      font-size: 1rem;
+    }
+    
+    .posts-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

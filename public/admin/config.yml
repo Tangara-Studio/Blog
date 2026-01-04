@@ -1,0 +1,28 @@
+backend:
+  name: github
+  repo: tu-usuario/tangara-blog # Actualizar con tu repo
+  branch: main
+  base_url: https://api.netlify.com # Para OAuth
+  auth_endpoint: auth
+
+# Usar develop branch en ambiente de desarrollo
+local_backend: true
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "text" }
+      - { label: "Autor", name: "author", widget: "string", default: "Tangara Studio" }
+      - { label: "Fecha de Publicación", name: "pubDate", widget: "datetime" }
+      - { label: "Imagen Destacada", name: "heroImage", widget: "image" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["devlog"] }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Contenido", name: "body", widget: "markdown" }
