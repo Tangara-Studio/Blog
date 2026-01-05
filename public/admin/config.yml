@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: tu-usuario/tangara-blog # Actualizar con tu repo
+  repo: tangara-studio/blog # Actualizar con tu repo
   branch: main
   base_url: https://api.netlify.com # Para OAuth
   auth_endpoint: auth
@@ -20,7 +20,7 @@ collections:
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Descripción", name: "description", widget: "text" }
-      - { label: "Autor", name: "author", widget: "string", default: "Tangara Studio" }
+      - { label: "Autor", name: "author", widget: "select", options: ["tangara-studio"], default: "tangara-studio", hint: "Para agregar más autores, edita src/data/authors.ts" }
       - { label: "Fecha de Publicación", name: "pubDate", widget: "datetime" }
       - { label: "Imagen Destacada", name: "heroImage", widget: "image" }
       - { label: "Tags", name: "tags", widget: "list", default: ["devlog"] }

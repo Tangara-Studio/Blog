@@ -6,9 +6,9 @@ const currentYear = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container">
     <div class="footer-content">
-      <div class="footer-section">
-        <h3>Tangara Studio</h3>
-        <p>Creando experiencias de videojuegos únicas</p>
+      <div class="footer-section footer-brand">
+        <img src="/images/logos/logo-horizontal.png" alt="Tangara Studio" class="footer-logo" />
+        <p>We mix the perfect synergy of Art with Engineering</p>
       </div>
       
       <div class="footer-section">
@@ -50,6 +50,20 @@ const currentYear = new Date().getFullYear();
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
     margin-bottom: 2rem;
+  }
+  
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .footer-logo {
+    height: 80px;
+    align-self: flex-start;
+    width: auto;
+    object-fit: contain;
+    max-width: 100%;
   }
   
   .footer-section h3 {

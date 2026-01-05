@@ -1,0 +1,75 @@
+---
+interface Props {
+  name?: string;
+  bio?: string;
+  avatar?: string;
+  fallbackName?: string;
+}
+
+const { name, bio, avatar, fallbackName = 'Tangara Studio' } = Astro.props;
+const displayName = name || fallbackName;
+const defaultAvatar = '/images/logos/alpha birds.png';
+---
+
+<div class="author-card">
+  <img 
+    src={avatar || defaultAvatar} 
+    alt={displayName}
+    class="author-avatar"
+  />
+  <div class="author-info">
+    <h4 class="author-name">{displayName}</h4>
+    {bio && <p class="author-bio">{bio}</p>}
+  </div>
+</div>
+
+<style>
+  .author-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--color-bg-light);
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    margin: 2rem 0;
+  }
+  
+  .author-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  
+  .author-info {
+    flex: 1;
+  }
+  
+  .author-name {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.125rem;
+    font-family: var(--font-titles);
+    color: var(--color-text);
+  }
+  
+  .author-bio {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
+  }
+  
+  @media (max-width: 768px) {
+    .author-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .author-avatar {
+      width: 80px;
+      height: 80px;
+    }
+  }
+</style>

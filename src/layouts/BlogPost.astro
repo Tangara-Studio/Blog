@@ -1,6 +1,8 @@
 ---
 import Layout from './Layout.astro';
+import AuthorCard from '../components/AuthorCard.astro';
 import { type CollectionEntry } from 'astro:content';
+import { getAuthor } from '../data/authors';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -8,6 +10,7 @@ interface Props {
 
 const { post } = Astro.props;
 const { title, description, author, pubDate, heroImage, tags } = post.data;
+const authorData = getAuthor(author);
 
 const formattedDate = new Intl.DateTimeFormat('es-ES', {
   year: 'numeric',
@@ -28,8 +31,6 @@ const formattedDate = new Intl.DateTimeFormat('es-ES', {
       <h1>{title}</h1>
       
       <div class="post-meta">
-        <span class="author">{author}</span>
-        <span class="separator">•</span>
         <time datetime={pubDate.toISOString()}>{formattedDate}</time>
       </div>
       
@@ -40,6 +41,13 @@ const formattedDate = new Intl.DateTimeFormat('es-ES', {
           ))}
         </div>
       )}
+      
+      <AuthorCard 
+        name={authorData?.name}
+        bio={authorData?.bio}
+        avatar={authorData?.avatar}
+        fallbackName={author}
+      />
     </header>
     
     <div class="post-content content">
