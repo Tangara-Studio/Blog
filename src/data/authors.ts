@@ -13,12 +13,12 @@ export const authors: Record<string, Author> = {
     bio: 'We mix the perfect synergy of Art with Engineering to offer high-quality Ludic and Interactive Experiences.',
     avatar: '/images/avatars/tangara-avatar.png'
   },
-  'jacob': {
+  'jwilschrey': {
     id: 'jwilschrey',
     name: 'Jacob Wilschrey',
     bio: 'CEO & Creative Director at Tangara Studio. Music lover and Scifi enthusiast.',
     avatar: '/images/avatars/jwilschrey.jpg'
-  },
+  }
   // Agrega más autores aquí según necesites
   // 'john-doe': {
   //   id: 'john-doe',
