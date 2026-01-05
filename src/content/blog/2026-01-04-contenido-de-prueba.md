@@ -1,7 +1,7 @@
 ---
 title: Contenido de prueba
 description: Este es un contenido de prueba
-author: Jacob Wilschrey
+author: jwilschrey
 pubDate: 2026-01-04T20:27:00.000-03:00
 heroImage: /images/uploads/720x450.jpg
 tags:
