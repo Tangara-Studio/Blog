@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 interface Props {
   title: string;
   description: string;
@@ -67,9 +69,6 @@ const isProduction = import.meta.env.PROD;
       </script>
     </>
   )}
-  
-  <!-- Global Styles -->
-  <link rel="stylesheet" href="/src/styles/global.css" />
 </head>
 <body>
   <slot />
