@@ -1,10 +1,13 @@
 ---
-title: 'Bienvenidos al Blog de Tangara Studio'
-description: 'Primer post del blog oficial de Tangara Studio. Aquí compartiremos devlogs, noticias y contenido sobre nuestros videojuegos.'
-author: 'Tangara Studio'
+title: Bienvenidos al Blog de Tangara Studio
+description: Primer post del blog oficial de Tangara Studio. Aquí compartiremos
+  devlogs, noticias y contenido sobre nuestros videojuegos.
+author: tangara-studio
 pubDate: 2025-01-04
-heroImage: '/images/placeholder-hero.jpg'
-tags: ['anuncio', 'bienvenida']
+heroImage: /images/placeholder-hero.jpg
+tags:
+  - anuncio
+  - bienvenida
 draft: false
 ---
 
