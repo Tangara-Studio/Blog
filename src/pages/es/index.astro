@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PostCard from '../components/PostCard.astro';
+import Layout from '../../layouts/Layout.astro';
+import PostCard from '../../components/PostCard.astro';
 import { getCollection } from 'astro:content';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -19,8 +19,8 @@ const sortedPosts = allPosts.sort((a, b) =>
 ---
 
 <Layout 
-  title={lang === 'en' ? "Tangara Studio Blog - Devlogs and video game news" : "Tangara Studio Blog - Devlogs y noticias de videojuegos"}
-  description={lang === 'en' ? "Official blog of Tangara Studio. Devlogs, updates and content about our video game development." : "Blog oficial de Tangara Studio. Devlogs, actualizaciones y contenido sobre el desarrollo de nuestros videojuegos."}
+  title="Tangara Studio Blog - Devlogs y noticias de videojuegos"
+  description="Blog oficial de Tangara Studio. Devlogs, actualizaciones y contenido sobre el desarrollo de nuestros videojuegos."
 >
   <div class="hero">
     <h1>{t('hero.title')}</h1>

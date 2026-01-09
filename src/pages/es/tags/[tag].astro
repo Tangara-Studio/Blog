@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import PostCard from '../../components/PostCard.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import Layout from '../../../layouts/Layout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog', ({ data }) => data.lang === 'en');
+  const allPosts = await getCollection('blog', ({ data }) => data.lang === 'es');
   const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
   
   return allTags.map(tag => ({
@@ -25,14 +25,14 @@ const t = useTranslations(lang);
 ---
 
 <Layout 
-  title={`Posts with tag: ${tag} - Tangara Studio Blog`}
-  description={`Explore all posts related to ${tag}`}
+  title={`Posts con tag: ${tag} - Tangara Studio Blog`}
+  description={`Explora todos los posts relacionados con ${tag}`}
 >
   <div class="tag-page">
     <header class="page-header">
-      <a href="/tags" class="back-link">← {lang === 'en' ? 'View all tags' : 'Ver todos los tags'}</a>
-      <h1>{lang === 'en' ? 'Posts about:' : 'Posts sobre:'} <span class="tag-highlight">{tag}</span></h1>
-      <p>{posts.length} {posts.length === 1 ? (lang === 'en' ? 'post found' : 'post encontrado') : (lang === 'en' ? 'posts found' : 'posts encontrados')}</p>
+      <a href="/es/tags" class="back-link">← Ver todos los tags</a>
+      <h1>Posts sobre: <span class="tag-highlight">{tag}</span></h1>
+      <p>{posts.length} {posts.length === 1 ? 'post encontrado' : 'posts encontrados'}</p>
     </header>
     
     <div class="posts-grid">

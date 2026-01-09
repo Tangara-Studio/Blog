@@ -1,7 +1,7 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from '../../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -33,7 +33,7 @@ const tagCounts = allTags.map(tag => ({
     
     <div class="tags-grid">
       {tagCounts.map(({ name, count }) => (
-        <a href={`/tags/${name}`} class="tag-card">
+        <a href={`/es/tags/${name}`} class="tag-card">
           <span class="tag-name">{name}</span>
           <span class="tag-count">{count} {count === 1 ? 'post' : 'posts'}</span>
         </a>

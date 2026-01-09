@@ -3,16 +3,19 @@ import Layout from './Layout.astro';
 import AuthorCard from '../components/AuthorCard.astro';
 import { type CollectionEntry } from 'astro:content';
 import { getAuthor } from '../data/authors';
+import { useTranslations } from '../i18n/utils';
 
 interface Props {
   post: CollectionEntry<'blog'>;
 }
 
 const { post } = Astro.props;
-const { title, description, author, pubDate, heroImage, tags } = post.data;
+const { title, description, author, pubDate, heroImage, tags, lang } = post.data;
 const authorData = getAuthor(author);
+const t = useTranslations(lang);
 
-const formattedDate = new Intl.DateTimeFormat('es-ES', {
+const locale = lang === 'es' ? 'es-ES' : 'en-US';
+const formattedDate = new Intl.DateTimeFormat(locale, {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
@@ -55,7 +58,7 @@ const formattedDate = new Intl.DateTimeFormat('es-ES', {
     </div>
     
     <footer class="post-footer content">
-      <a href="/" class="back-link">← Volver al inicio</a>
+      <a href={lang === 'en' ? '/' : '/es'} class="back-link">← {lang === 'en' ? 'Back to home' : 'Volver al inicio'}</a>
     </footer>
   </article>
 </Layout>

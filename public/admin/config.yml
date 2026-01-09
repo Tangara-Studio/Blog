@@ -25,4 +25,5 @@ collections:
       - { label: "Imagen Destacada", name: "heroImage", widget: "image" }
       - { label: "Tags", name: "tags", widget: "list", default: ["devlog"] }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Idioma", name: "lang", widget: "select", options: ["en", "es"], default: "en", hint: "Selecciona el idioma del post" }
       - { label: "Contenido", name: "body", widget: "markdown" }

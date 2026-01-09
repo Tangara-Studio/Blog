@@ -7,6 +7,7 @@ heroImage: /images/uploads/720x450.jpg
 tags:
   - devlog
 draft: false
+lang: es
 ---
 Contenido bla bla bla bla
 

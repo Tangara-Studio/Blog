@@ -6,6 +6,7 @@ pubDate: 2025-01-04
 heroImage: '/images/placeholder-hero.jpg'
 tags: ['tutorial', 'steam', 'marketing']
 draft: false
+lang: es
 ---
 
 # Widgets de Steam en tus Posts

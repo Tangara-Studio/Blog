@@ -6,15 +6,16 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, pubDate, heroImage, tags } = post.data;
+const { title, description, pubDate, heroImage, tags, lang } = post.data;
 
-const formattedDate = new Intl.DateTimeFormat('es-ES', {
+const locale = lang === 'es' ? 'es-ES' : 'en-US';
+const formattedDate = new Intl.DateTimeFormat(locale, {
   year: 'numeric',
   month: 'short',
   day: 'numeric'
 }).format(pubDate);
 
-const postUrl = `/blog/${post.slug}`;
+const postUrl = lang === 'es' ? `/es/blog/${post.slug}` : `/blog/${post.slug}`;
 ---
 
 <article class="post-card">

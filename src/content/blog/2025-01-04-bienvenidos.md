@@ -9,6 +9,7 @@ tags:
   - anuncio
   - bienvenida
 draft: false
+lang: es
 ---
 
 # ¡Bienvenidos!

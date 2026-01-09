@@ -1,0 +1,51 @@
+export const languages = {
+  en: 'English',
+  es: 'Español',
+};
+
+export const defaultLang = 'en';
+
+export const ui = {
+  en: {
+    'nav.blog': 'Blog',
+    'nav.tags': 'Tags',
+    'nav.web': 'Website',
+    'hero.title': 'Tangara Studio Blog',
+    'hero.description': 'Devlogs, news, and content about our video game development',
+    'post.readMore': 'Read more',
+    'post.author': 'Author',
+    'post.publishedOn': 'Published on',
+    'post.tags': 'Tags',
+    'tags.title': 'Tags',
+    'tags.description': 'Browse posts by tag',
+    'tags.allPosts': 'All posts tagged with',
+    'footer.allRightsReserved': 'All rights reserved',
+    'footer.madeWith': 'Made with',
+    'footer.by': 'by',
+    'noPosts.message': 'No posts published yet. Check back soon!',
+    '404.title': 'Page Not Found',
+    '404.message': 'Sorry, we couldn\'t find the page you\'re looking for.',
+    '404.backHome': 'Go back home',
+  },
+  es: {
+    'nav.blog': 'Blog',
+    'nav.tags': 'Tags',
+    'nav.web': 'Web',
+    'hero.title': 'Blog de Tangara Studio',
+    'hero.description': 'Devlogs, noticias y contenido sobre el desarrollo de nuestros videojuegos',
+    'post.readMore': 'Leer más',
+    'post.author': 'Autor',
+    'post.publishedOn': 'Publicado el',
+    'post.tags': 'Tags',
+    'tags.title': 'Tags',
+    'tags.description': 'Navegar posts por tag',
+    'tags.allPosts': 'Todos los posts con el tag',
+    'footer.allRightsReserved': 'Todos los derechos reservados',
+    'footer.madeWith': 'Hecho con',
+    'footer.by': 'por',
+    'noPosts.message': 'No hay posts publicados todavía. ¡Vuelve pronto!',
+    '404.title': 'Página No Encontrada',
+    '404.message': 'Lo sentimos, no pudimos encontrar la página que buscas.',
+    '404.backHome': 'Volver al inicio',
+  },
+} as const;
