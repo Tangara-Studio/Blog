@@ -1,0 +1,37 @@
+{
+  "site": {
+    "title": "Blog de Tangara Studio",
+    "description": "Devlogs, noticias y contenido sobre el desarrollo de videojuegos"
+  },
+  "nav": {
+    "blog": "Blog",
+    "tags": "Tags",
+    "web": "Web"
+  },
+  "hero": {
+    "title": "Blog de Tangara Studio",
+    "description": "Devlogs, noticias y contenido sobre el desarrollo de nuestros videojuegos"
+  },
+  "post": {
+    "backToHome": "← Volver al inicio",
+    "readMore": "Leer más",
+    "publishedOn": "Publicado el",
+    "by": "por"
+  },
+  "footer": {
+    "links": "Enlaces",
+    "follow": "Síguenos",
+    "mainWeb": "Web Principal",
+    "allRightsReserved": "Todos los derechos reservados"
+  },
+  "tags": {
+    "title": "Tags",
+    "description": "Navega posts por tag",
+    "postsTaggedWith": "Posts etiquetados con"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "description": "La página que buscas no existe"
+  },
+  "noPosts": "No hay posts publicados todavía. ¡Vuelve pronto!"
+}

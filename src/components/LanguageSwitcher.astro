@@ -1,0 +1,68 @@
+---
+import { languages, languageLabels, type Language } from '../i18n/config';
+import { getLangFromUrl } from '../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const currentPath = Astro.url.pathname;
+
+// Remove language prefix from path if it exists
+function getPathWithoutLang(path: string): string {
+  const [, maybeLang, ...rest] = path.split('/');
+  if (maybeLang && (maybeLang === 'en' || maybeLang === 'es')) {
+    return '/' + rest.join('/');
+  }
+  return path;
+}
+
+const basePath = getPathWithoutLang(currentPath);
+---
+
+<div class="language-switcher">
+  {Object.entries(languages).map(([lang, _]) => {
+    const langKey = lang as Language;
+    const isActive = langKey === currentLang;
+    const href = langKey === 'en' ? basePath : `/${lang}${basePath}`;
+    
+    return (
+      <a 
+        href={href}
+        class:list={['lang-option', { active: isActive }]}
+        aria-label={`Switch to ${languages[langKey]}`}
+        aria-current={isActive ? 'page' : undefined}
+      >
+        {languageLabels[langKey]}
+      </a>
+    );
+  })}
+</div>
+
+<style>
+  .language-switcher {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .lang-option {
+    padding: 0.25rem 0.5rem;
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-weight: 500;
+    font-size: 0.875rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+  
+  .lang-option:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+  
+  .lang-option.active {
+    color: var(--color-primary);
+    background: var(--color-bg-light);
+    border-color: var(--color-primary);
+    font-weight: 600;
+  }
+</style>

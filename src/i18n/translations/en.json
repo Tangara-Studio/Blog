@@ -1,0 +1,37 @@
+{
+  "site": {
+    "title": "Tangara Studio Blog",
+    "description": "Devlogs, news, and content about video game development"
+  },
+  "nav": {
+    "blog": "Blog",
+    "tags": "Tags",
+    "web": "Website"
+  },
+  "hero": {
+    "title": "Tangara Studio Blog",
+    "description": "Devlogs, news, and content about video game development"
+  },
+  "post": {
+    "backToHome": "← Back to home",
+    "readMore": "Read more",
+    "publishedOn": "Published on",
+    "by": "by"
+  },
+  "footer": {
+    "links": "Links",
+    "follow": "Follow us",
+    "mainWeb": "Main Website",
+    "allRightsReserved": "All rights reserved"
+  },
+  "tags": {
+    "title": "Tags",
+    "description": "Browse posts by tag",
+    "postsTaggedWith": "Posts tagged with"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist"
+  },
+  "noPosts": "No posts published yet. Come back soon!"
+}

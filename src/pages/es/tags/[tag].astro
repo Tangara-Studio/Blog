@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import PostCard from '../../components/PostCard.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import Layout from '../../../layouts/Layout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { useTranslations } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog');
+  const allPosts = await getCollection('blog', ({ data }) => data.language === 'es');
   const allTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
   
   return allTags.map(tag => ({
@@ -21,11 +21,8 @@ export async function getStaticPaths() {
 const { tag } = Astro.params;
 const { posts } = Astro.props;
 
-const lang = getLangFromUrl(Astro.url);
+const lang = 'es';
 const t = useTranslations(lang);
-
-// Filter posts by current language
-const languagePosts = posts.filter((post: any) => post.data.language === lang);
 ---
 
 <Layout 
@@ -34,13 +31,13 @@ const languagePosts = posts.filter((post: any) => post.data.language === lang);
 >
   <div class="tag-page">
     <header class="page-header">
-      <a href="/tags" class="back-link">← {t('tags.title')}</a>
+      <a href="/es/tags" class="back-link">← {t('tags.title')}</a>
       <h1>{t('tags.postsTaggedWith')}: <span class="tag-highlight">{tag}</span></h1>
-      <p>{languagePosts.length} {languagePosts.length === 1 ? 'post' : 'posts'}</p>
+      <p>{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p>
     </header>
     
     <div class="posts-grid">
-      {languagePosts.map((post: any) => (
+      {posts.map((post: any) => (
         <PostCard post={post} />
       ))}
     </div>

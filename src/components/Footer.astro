@@ -1,5 +1,8 @@
 ---
-// Footer component
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const currentYear = new Date().getFullYear();
 ---
 
@@ -12,15 +15,15 @@ const currentYear = new Date().getFullYear();
       </div>
       
       <div class="footer-section">
-        <h4>Enlaces</h4>
+        <h4>{t('footer.links')}</h4>
         <ul>
-          <li><a href="/">Blog</a></li>
-          <li><a href="https://tangara.studio" target="_blank" rel="noopener">Web Principal</a></li>
+          <li><a href="/">{t('nav.blog')}</a></li>
+          <li><a href="https://tangara.studio" target="_blank" rel="noopener">{t('footer.mainWeb')}</a></li>
         </ul>
       </div>
       
       <div class="footer-section">
-        <h4>Síguenos</h4>
+        <h4>{t('footer.follow')}</h4>
         <ul class="social-links">
           <li><a href="https://x.com/TangaraStudio" target="_blank" rel="noopener">Twitter/X</a></li>
           <li><a href="https://discord.gg/HT5Vwm8eYu" target="_blank" rel="noopener">Discord</a></li>
@@ -32,7 +35,7 @@ const currentYear = new Date().getFullYear();
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; {currentYear} Tangara Studio. Todos los derechos reservados.</p>
+      <p>&copy; {currentYear} Tangara Studio. {t('footer.allRightsReserved')}.</p>
     </div>
   </div>
 </footer>
