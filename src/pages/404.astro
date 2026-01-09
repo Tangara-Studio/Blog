@@ -1,16 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout 
-  title="404 - Página no encontrada"
-  description="La página que buscas no existe"
+  title={t('404.title')}
+  description={t('404.message')}
 >
   <div class="error-page">
     <h1>404</h1>
-    <h2>Página no encontrada</h2>
-    <p>Lo sentimos, la página que buscas no existe o ha sido movida.</p>
-    <a href="/" class="back-button">← Volver al inicio</a>
+    <h2>{t('404.title')}</h2>
+    <p>{t('404.message')}</p>
+    <a href={lang === 'en' ? '/' : '/es'} class="back-button">← {t('404.backHome')}</a>
   </div>
 </Layout>
 

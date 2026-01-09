@@ -1,5 +1,9 @@
 ---
 // Footer component
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const currentYear = new Date().getFullYear();
 ---
 
@@ -32,7 +36,7 @@ const currentYear = new Date().getFullYear();
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; {currentYear} Tangara Studio. Todos los derechos reservados.</p>
+      <p>&copy; {currentYear} Tangara Studio. {t('footer.allRightsReserved')}.</p>
     </div>
   </div>
 </footer>
