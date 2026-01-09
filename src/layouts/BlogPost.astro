@@ -53,7 +53,7 @@ const formattedDate = formatDate(pubDate, language);
     </div>
     
     <footer class="post-footer content">
-      <a href="/" class="back-link">{t('post.backToHome')}</a>
+      <a href={language === 'en' ? '/' : '/es/'} class="back-link">{t('post.backToHome')}</a>
     </footer>
   </article>
 </Layout>

@@ -14,8 +14,8 @@ const t = useTranslations(lang);
       </a>
       
       <div class="nav-links">
-        <a href="/">{t('nav.blog')}</a>
-        <a href="/tags">{t('nav.tags')}</a>
+        <a href={lang === 'en' ? '/' : '/es/'}>{t('nav.blog')}</a>
+        <a href={lang === 'en' ? '/tags' : '/es/tags'}>{t('nav.tags')}</a>
         <a href="https://tangara.studio" target="_blank" rel="noopener">{t('nav.web')}</a>
         <LanguageSwitcher />
       </div>
