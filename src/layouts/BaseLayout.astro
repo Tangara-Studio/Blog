@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import { getLangFromUrl, getLocalizedPath } from '../i18n/utils';
+import { supportedLanguages, defaultLang } from '../i18n/config';
 
 interface Props {
   title: string;
@@ -10,8 +12,13 @@ interface Props {
 
 const { title, description, image = '/images/og-default.jpg', article = false } = Astro.props;
 
+const currentLang = getLangFromUrl(Astro.url);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL(image, Astro.site);
+
+// Get path without language prefix for alternate links
+const pathWithoutLang = Astro.url.pathname.replace(/^\/(en|es)/, '');
+const basePath = pathWithoutLang || '/';
 
 // Google Analytics ID desde variables de entorno
 const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID || '';
@@ -19,7 +26,7 @@ const isProduction = import.meta.env.PROD;
 ---
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang={currentLang}>
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +47,14 @@ const isProduction = import.meta.env.PROD;
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
   
+  <!-- Alternate Language Links -->
+  {supportedLanguages.map((lang) => {
+    const localizedPath = getLocalizedPath(basePath, lang);
+    const alternateURL = new URL(localizedPath, Astro.site);
+    return <link rel="alternate" hreflang={lang} href={alternateURL} />;
+  })}
+  <link rel="alternate" hreflang="x-default" href={new URL(getLocalizedPath(basePath, defaultLang), Astro.site)} />
+  
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content={article ? 'article' : 'website'} />
   <meta property="og:url" content={canonicalURL} />
@@ -47,6 +62,7 @@ const isProduction = import.meta.env.PROD;
   <meta property="og:description" content={description} />
   <meta property="og:image" content={socialImageURL} />
   <meta property="og:site_name" content="Tangara Studio Blog" />
+  <meta property="og:locale" content={currentLang === 'es' ? 'es_ES' : 'en_US'} />
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />

@@ -1,5 +1,9 @@
 ---
-// Header component
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <header class="site-header">
@@ -10,9 +14,10 @@
       </a>
       
       <div class="nav-links">
-        <a href="/">Blog</a>
-        <a href="/tags">Tags</a>
-        <a href="https://tangara.studio" target="_blank" rel="noopener">Web</a>
+        <a href={lang === 'en' ? '/' : '/es/'}>{t('nav.blog')}</a>
+        <a href={lang === 'en' ? '/tags' : '/es/tags'}>{t('nav.tags')}</a>
+        <a href="https://tangara.studio" target="_blank" rel="noopener">{t('nav.web')}</a>
+        <LanguageSwitcher />
       </div>
     </nav>
   </div>
