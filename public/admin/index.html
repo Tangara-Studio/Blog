@@ -13,6 +13,75 @@
   <script>
     // Inyectar estilos solo en el iframe del preview
     CMS.registerPreviewStyle('/admin/preview.css');
+    
+    // Template personalizado para preview con footer social
+    var PostPreview = createClass({
+      render: function() {
+        var entry = this.props.entry;
+        var title = entry.getIn(['data', 'title']);
+        var body = this.props.widgetFor('body');
+        var footerTemplate = entry.getIn(['data', 'footerTemplate']);
+        var language = entry.getIn(['data', 'language']) || 'es';
+        
+        var footerHTML = '';
+        
+        if (footerTemplate === 'social') {
+          var socialContent = language === 'es' ? {
+            title: '¿Te gustó este artículo?',
+            description: 'Pues compártelo y recuerda seguirnos en nuestras redes sociales para enterarte de todas nuestras novedades.'
+          } : {
+            title: 'Did you like this article?',
+            description: 'Share it and remember to follow us on our social media to stay updated with all our news.'
+          };
+          
+          var socialLinks = [
+            { name: 'Instagram', icon: 'fab fa-instagram' },
+            { name: 'X', icon: 'fab fa-x-twitter' },
+            { name: 'LinkedIn', icon: 'fab fa-linkedin' },
+            { name: 'YouTube', icon: 'fab fa-youtube' },
+            { name: 'Discord', icon: 'fab fa-discord' }
+          ];
+          
+          footerHTML = h('aside', {className: 'social-footer', style: {
+            marginTop: '3rem',
+            padding: '2rem',
+            background: 'var(--color-bg-light)',
+            border: '1px solid var(--color-border)',
+            borderRadius: '12px',
+            textAlign: 'center'
+          }},
+            h('h3', {style: {margin: '0 0 1rem 0', fontSize: '1.5rem'}}, socialContent.title),
+            h('p', {style: {margin: '0 0 1.5rem 0', color: 'var(--color-text-light)'}}, socialContent.description),
+            h('div', {style: {display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap'}},
+              socialLinks.map(function(social) {
+                return h('span', {
+                  key: social.name,
+                  style: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '50px',
+                    height: '50px',
+                    background: 'var(--color-primary)',
+                    color: 'white',
+                    borderRadius: '50%',
+                    fontSize: '1.5rem'
+                  }
+                }, h('i', {className: social.icon}));
+              })
+            )
+          );
+        }
+        
+        return h('div', {},
+          h('h1', {style: {fontFamily: 'var(--font-titles)', fontSize: '2.5rem', marginBottom: '2rem'}}, title),
+          h('div', {}, body),
+          footerHTML
+        );
+      }
+    });
+    
+    CMS.registerPreviewTemplate('blog', PostPreview);
   </script>
 </body>
 </html>

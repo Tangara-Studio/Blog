@@ -8,29 +8,41 @@ const { language = 'es' } = Astro.props;
 const content = {
   es: {
     title: '¿Te gustó este artículo?',
-    description: 'Síguenos para más contenido sobre desarrollo de videojuegos y devlogs de Tangara Studio.',
-    button: 'Síguenos en GitHub'
+    description: 'Pues compártelo y recuerda seguirnos en nuestras redes sociales para enterarte de todas nuestras novedades.'
   },
   en: {
     title: 'Did you like this article?',
-    description: 'Follow us for more content about game development and devlogs from Tangara Studio.',
-    button: 'Follow us on GitHub'
+    description: 'Share it and remember to follow us on our social media to stay updated with all our news.'
   }
 };
 
 const t = content[language];
+
+const socialLinks = [
+  { name: 'Instagram', url: 'https://www.instagram.com/tangarastudio/', icon: 'fab fa-instagram' },
+  { name: 'X', url: 'https://x.com/TangaraStudio', icon: 'fab fa-x-twitter' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/company/tangara-studio/', icon: 'fab fa-linkedin' },
+  { name: 'YouTube', url: 'https://www.youtube.com/@TangaraStudio', icon: 'fab fa-youtube' },
+  { name: 'Discord', url: 'https://discord.gg/HT5Vwm8eYu', icon: 'fab fa-discord' }
+];
 ---
 
-<aside class="post-footer-cta">
+<link rel="stylesheet" href="https://cdn.tangara.studio/vendors/fontawesome-free-6.6.0-web/css/all.css" />
+
+<aside class="social-footer">
   <h3>{t.title}</h3>
   <p>{t.description}</p>
-  <a href="https://github.com/Tangara-Studio" target="_blank" rel="noopener noreferrer" class="cta-button">
-    {t.button}
-  </a>
+  <div class="social-links">
+    {socialLinks.map(social => (
+      <a href={social.url} target="_blank" rel="noopener noreferrer" class="social-button" aria-label={social.name}>
+        <i class={social.icon}></i>
+      </a>
+    ))}
+  </div>
 </aside>
 
 <style>
-  .post-footer-cta {
+  .social-footer {
     margin-top: 3rem;
     padding: 2rem;
     background: var(--color-bg-light);
@@ -39,29 +51,39 @@ const t = content[language];
     text-align: center;
   }
 
-  .post-footer-cta h3 {
+  .social-footer h3 {
     margin: 0 0 1rem 0;
     font-size: 1.5rem;
     color: var(--color-text);
   }
 
-  .post-footer-cta p {
+  .social-footer p {
     margin: 0 0 1.5rem 0;
     color: var(--color-text-light);
   }
 
-  .cta-button {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .social-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
     background: var(--color-primary);
     color: white;
+    border-radius: 50%;
     text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
+    font-size: 1.5rem;
     transition: background 0.2s, transform 0.2s;
   }
 
-  .cta-button:hover {
+  .social-button:hover {
     background: var(--color-primary-dark);
     transform: translateY(-2px);
   }

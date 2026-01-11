@@ -61,5 +61,5 @@ collections:
       - { label: "Tags", name: "tags", widget: "list", default: ["devlog"] }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Idioma / Language", name: "language", widget: "select", options: ["en", "es"], default: "en", hint: "Selecciona el idioma del post / Select the post language" }
-      - { label: "Footer Template", name: "footerTemplate", widget: "select", options: ["none", "cta", "newsletter", "share"], default: "none", hint: "Ninguno / Call to Action / Newsletter / Compartir en redes", required: false }
+      - { label: "Social Footer", name: "footerTemplate", widget: "select", options: ["none", "social"], default: "social", hint: "Mostrar footer con redes sociales", required: false }
       - { label: "Contenido", name: "body", widget: "markdown" }
