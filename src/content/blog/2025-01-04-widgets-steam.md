@@ -1,11 +1,15 @@
 ---
-title: 'Cómo Incrustar Widgets de Steam en tu Blog'
-description: 'Guía rápida para agregar widgets interactivos de Steam Store a tus posts de devlog'
-author: 'Tangara Studio'
+title: Cómo Incrustar Widgets de Steam en tu Blog
+description: Guía rápida para agregar widgets interactivos de Steam Store a tus
+  posts de devlog
+author: Tangara Studio
 pubDate: 2025-01-04
-heroImage: '/images/placeholder-hero.jpg'
-tags: ['tutorial', 'steam', 'marketing']
-draft: false
+heroImage: /images/placeholder-hero.jpg
+tags:
+  - tutorial
+  - steam
+  - marketing
+draft: true
 language: es
 ---
 
