@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Test OAuth Flow</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 10px 5px;
+    }
+    #log {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-top: 20px;
+      height: 400px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .success { color: green; }
+    .error { color: red; }
+    .info { color: blue; }
+  </style>
+</head>
+<body>
+  <h1>Test OAuth Flow - Decap CMS</h1>
+  <p>Esta página simula el comportamiento de Decap CMS para probar el flujo OAuth.</p>
+  
+  <button onclick="startAuth()">1. Iniciar Login con GitHub</button>
+  <button onclick="clearLog()">Limpiar Log</button>
+  
+  <div id="log"></div>
+
+  <script>
+    var authWindow = null;
+    
+    function log(message, type = 'info') {
+      var logDiv = document.getElementById('log');
+      var time = new Date().toLocaleTimeString();
+      var className = type;
+      logDiv.innerHTML += '<div class="' + className + '">[' + time + '] ' + message + '</div>';
+      logDiv.scrollTop = logDiv.scrollHeight;
+      console.log(message);
+    }
+    
+    function clearLog() {
+      document.getElementById('log').innerHTML = '';
+    }
+    
+    function startAuth() {
+      log('🚀 Iniciando flujo OAuth...', 'info');
+      
+      var authUrl = 'https://94fnfek163.execute-api.us-east-1.amazonaws.com/oauth/auth';
+      log('📍 Abriendo ventana: ' + authUrl, 'info');
+      
+      // Abrir ventana popup
+      authWindow = window.open(
+        authUrl,
+        'oauth-window',
+        'width=600,height=700,scrollbars=yes'
+      );
+      
+      if (!authWindow) {
+        log('❌ ERROR: No se pudo abrir el popup. Verifica que los popups no estén bloqueados.', 'error');
+        return;
+      }
+      
+      log('✓ Popup abierto correctamente', 'success');
+      log('👂 Esperando mensajes del popup...', 'info');
+    }
+    
+    // Escuchar mensajes del popup
+    window.addEventListener('message', function(event) {
+      log('📨 Mensaje recibido:', 'info');
+      log('  Origin: ' + event.origin, 'info');
+      log('  Data: ' + event.data, 'info');
+      
+      var data = event.data;
+      
+      // Handshake inicial del popup
+      if (data === 'authorizing:github') {
+        log('🤝 Recibido handshake inicial del popup', 'success');
+        log('📤 Enviando confirmación al popup...', 'info');
+        
+        // Responder al popup
+        if (authWindow && !authWindow.closed) {
+          authWindow.postMessage('authorizing:github', event.origin);
+          log('✓ Confirmación enviada', 'success');
+        } else {
+          log('❌ ERROR: La ventana del popup ya no existe', 'error');
+        }
+      }
+      // Mensaje con el token
+      else if (typeof data === 'string' && data.startsWith('authorization:github:')) {
+        var parts = data.split(':');
+        log('🎉 ¡TOKEN RECIBIDO!', 'success');
+        log('  Provider: ' + parts[1], 'success');
+        log('  Status: ' + parts[2], 'success');
+        
+        try {
+          var tokenData = JSON.parse(parts.slice(3).join(':'));
+          log('  Token (primeros 20 chars): ' + tokenData.token.substring(0, 20) + '...', 'success');
+          log('✅ AUTENTICACIÓN EXITOSA - El flujo OAuth funciona correctamente', 'success');
+          
+          // Cerrar el popup
+          if (authWindow && !authWindow.closed) {
+            authWindow.close();
+            log('✓ Popup cerrado', 'info');
+          }
+        } catch (e) {
+          log('❌ ERROR parseando token: ' + e.message, 'error');
+        }
+      }
+      else {
+        log('⚠️ Mensaje desconocido: ' + data, 'error');
+      }
+    }, false);
+    
+    log('✓ Sistema listo. Haz clic en "Iniciar Login" para probar.', 'success');
+  </script>
+</body>
+</html>

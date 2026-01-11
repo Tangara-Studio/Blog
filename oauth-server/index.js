@@ -17,9 +17,14 @@ function randomState() {
 
 // Handler principal de Lambda
 exports.handler = async (event) => {
-  const { httpMethod, path, queryStringParameters = {} } = event;
+  console.log('Full event:', JSON.stringify(event, null, 2));
   
-  console.log('Request:', { httpMethod, path, queryStringParameters });
+  // HTTP API v2 (payload format 2.0) estructura
+  const httpMethod = event.requestContext?.http?.method || 'GET';
+  const path = event.requestContext?.http?.path || event.rawPath || '/';
+  const queryStringParameters = event.queryStringParameters || {};
+  
+  console.log('Parsed:', { httpMethod, path, queryStringParameters });
 
   // CORS headers
   const headers = {
@@ -89,36 +94,98 @@ exports.handler = async (event) => {
         throw new Error(tokenData.error_description || tokenData.error);
       }
 
-      // Redirigir de vuelta al CMS con el token
-      const redirectUrl = `${config.redirectUrl}?token=${tokenData.access_token}&provider=github`;
-      
-      // Página HTML con mensaje y redirección automática
+      // Página HTML con postMessage para Decap CMS
       const html = `
         <!DOCTYPE html>
         <html>
         <head>
           <meta charset="utf-8">
           <title>Autenticación exitosa</title>
+          <style>
+            body {
+              font-family: system-ui, -apple-system, sans-serif;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
+              margin: 0;
+              background: #f5f5f5;
+            }
+            .container {
+              text-align: center;
+              background: white;
+              padding: 2rem;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            h2 { color: #2e7d32; margin: 0 0 1rem 0; }
+            button {
+              margin-top: 1rem;
+              padding: 0.5rem 1rem;
+              background: #1976d2;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+            }
+            button:hover { background: #1565c0; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h2>✓ Autenticación exitosa</h2>
+            <p id="status">Cerrando ventana...</p>
+            <button onclick="window.close()">Cerrar ventana</button>
+          </div>
+          
           <script>
             (function() {
-              // Enviar mensaje al opener (ventana del CMS)
-              if (window.opener) {
-                window.opener.postMessage(
-                  'authorization:github:success:${JSON.stringify({ token: tokenData.access_token, provider: 'github' })}',
-                  '${config.redirectUrl}'
-                );
+              if (!window.opener) {
+                document.getElementById('status').textContent = 'Error: No se pudo comunicar con la ventana principal.';
+                return;
               }
               
-              // Redirigir después de un momento
+              var token = "${tokenData.access_token}";
+              var provider = "github";
+              var content = { token: token, provider: provider };
+              var messageSent = false;
+              
+              function sendToken(targetOrigin) {
+                if (messageSent) return;
+                messageSent = true;
+                
+                var message = "authorization:" + provider + ":success:" + JSON.stringify(content);
+                
+                try {
+                  window.opener.postMessage(message, targetOrigin);
+                  window.opener.postMessage(content, targetOrigin);
+                  
+                  setTimeout(function() {
+                    window.close();
+                  }, 1500);
+                } catch (err) {
+                  if (targetOrigin !== '*') {
+                    messageSent = false;
+                    sendToken('*');
+                  }
+                }
+              }
+              
+              function receiveMessage(e) {
+                var targetOrigin = e.origin || '*';
+                sendToken(targetOrigin);
+              }
+              
+              window.addEventListener("message", receiveMessage, false);
+              window.opener.postMessage("authorizing:" + provider, "*");
+              
               setTimeout(function() {
-                window.close();
-                window.location.href = '${redirectUrl}';
+                if (!messageSent) {
+                  sendToken('*');
+                }
               }, 1000);
             })();
           </script>
-        </head>
-        <body>
-          <p>Autenticación exitosa. Redirigiendo...</p>
         </body>
         </html>
       `;

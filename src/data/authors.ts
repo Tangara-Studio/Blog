@@ -16,8 +16,14 @@ export const authors: Record<string, Author> = {
   'jwilschrey': {
     id: 'jwilschrey',
     name: 'Jacob Wilschrey',
-    bio: 'CEO & Creative Director at Tangara Studio. Music lover and Scifi enthusiast.',
+    bio: 'CEO & Creative Director at Tangara Studio. Music lover and Scifi enthusiast. A staunch and clinical art consumer.',
     avatar: '/images/avatars/jwilschrey.jpg'
+  },
+  'dactrtr': {
+    id: 'dactrtr',
+    name: 'Sebastian Zúñiga Rivas',
+    bio: 'Co-Founder & Art Director at Tangara Studio. UI Designer, Illustrator and Developer (HTML/CSS/SwiftUI) located anywhere is a power outlet and a Internet connection.',
+    avatar: '/images/avatars/dactrtr.png'
   }
   // Agrega más autores aquí según necesites
   // 'john-doe': {

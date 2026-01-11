@@ -20,7 +20,7 @@ collections:
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Descripción", name: "description", widget: "text" }
-      - { label: "Autor", name: "author", widget: "select", options: ["tangara-studio", "jwilschrey"], default: "tangara-studio", hint: "Para agregar más autores, edita src/data/authors.ts y este archivo" }
+      - { label: "Autor", name: "author", widget: "select", options: ["tangara-studio", "jwilschrey", "dactrtr"], default: "tangara-studio", hint: "Para agregar más autores, edita src/data/authors.ts y este archivo" }
       - { label: "Fecha de Publicación", name: "pubDate", widget: "datetime" }
       - { label: "Imagen Destacada", name: "heroImage", widget: "image" }
       - { label: "Tags", name: "tags", widget: "list", default: ["devlog"] }
