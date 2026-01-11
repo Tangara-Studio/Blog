@@ -1,11 +1,14 @@
 ---
-title: 'How to Embed Steam Widgets in Your Blog'
-description: 'Quick guide to add interactive Steam Store widgets to your devlog posts'
-author: 'Tangara Studio'
+title: How to Embed Steam Widgets in Your Blog
+description: Quick guide to add interactive Steam Store widgets to your devlog posts
+author: Tangara Studio
 pubDate: 2025-01-04
-heroImage: '/images/placeholder-hero.jpg'
-tags: ['tutorial', 'steam', 'marketing']
-draft: false
+heroImage: /images/placeholder-hero.jpg
+tags:
+  - tutorial
+  - steam
+  - marketing
+draft: true
 language: en
 ---
 
