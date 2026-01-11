@@ -1,0 +1,13 @@
+{
+  "name": "tangara-blog-oauth-server",
+  "version": "1.0.0",
+  "description": "OAuth server for Decap CMS with GitHub authentication",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test-local.js"
+  },
+  "keywords": ["oauth", "decap-cms", "github", "lambda"],
+  "author": "Tangara Studio",
+  "license": "MIT",
+  "dependencies": {}
+}

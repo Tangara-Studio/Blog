@@ -1,0 +1,101 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: OAuth server for Tangara Blog Decap CMS
+
+Parameters:
+  GitHubClientId:
+    Type: String
+    Description: GitHub OAuth App Client ID
+  GitHubClientSecret:
+    Type: String
+    Description: GitHub OAuth App Client Secret
+    NoEcho: true
+  RedirectUrl:
+    Type: String
+    Default: https://blog.tangara.studio/admin/
+    Description: URL to redirect after authentication
+
+Resources:
+  OAuthFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: iam-role-lambda-prod-blog-oauth
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  OAuthApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: $default
+      Name: apigw-us-east-1-blog-oauth
+      CorsConfiguration:
+        AllowOrigins:
+          - '*'
+        AllowHeaders:
+          - '*'
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+
+  OAuthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: lambda-prod-blog-oauth-server
+      CodeUri: .
+      Handler: index.handler
+      Runtime: nodejs20.x
+      Timeout: 30
+      MemorySize: 256
+      Role: !GetAtt OAuthFunctionRole.Arn
+      Environment:
+        Variables:
+          GITHUB_CLIENT_ID: !Ref GitHubClientId
+          GITHUB_CLIENT_SECRET: !Ref GitHubClientSecret
+          REDIRECT_URL: !Ref RedirectUrl
+      Events:
+        Auth:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref OAuthApi
+            Path: /oauth/auth
+            Method: GET
+        Callback:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref OAuthApi
+            Path: /oauth/callback
+            Method: GET
+        Success:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref OAuthApi
+            Path: /oauth/success
+            Method: GET
+        Options:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref OAuthApi
+            Path: /oauth/{proxy+}
+            Method: OPTIONS
+
+Outputs:
+  ApiUrl:
+    Description: OAuth API endpoint URL
+    Value: !Sub 'https://${OAuthApi}.execute-api.${AWS::Region}.amazonaws.com/oauth'
+  FunctionName:
+    Description: Lambda function name
+    Value: !Ref OAuthFunction
+  RoleName:
+    Description: IAM Role name
+    Value: !Ref OAuthFunctionRole
+  ApiGatewayName:
+    Description: API Gateway name
+    Value: !Ref OAuthApi

@@ -2,7 +2,7 @@ backend:
   name: github
   repo: Tangara-Studio/Blog
   branch: main
-  base_url: https://api.netlify.com # Para OAuth
+  base_url: https://94fnfek163.execute-api.us-east-1.amazonaws.com/oauth
   auth_endpoint: auth
 
 # Usar develop branch en ambiente de desarrollo
