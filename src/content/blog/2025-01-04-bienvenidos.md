@@ -10,7 +10,7 @@ tags:
   - bienvenida
 draft: false
 language: es
-footerTemplate: cta
+footerTemplate: social
 ---
 # ¡Bienvenidos!
 

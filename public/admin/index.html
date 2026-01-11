@@ -14,6 +14,26 @@
     // Inyectar estilos solo en el iframe del preview
     CMS.registerPreviewStyle('/admin/preview.css');
     
+    // Auto-seleccionar agrupación por mes
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        // Buscar el botón de "Group by" y hacer clic
+        var groupButton = document.querySelector('[aria-label*="Group"]') || 
+                         document.querySelector('button:has-text("Group")');
+        if (groupButton) {
+          groupButton.click();
+          setTimeout(function() {
+            // Seleccionar "Mes" de las opciones
+            var mesOption = Array.from(document.querySelectorAll('button, [role="menuitem"]'))
+              .find(el => el.textContent && el.textContent.includes('Mes'));
+            if (mesOption) {
+              mesOption.click();
+            }
+          }, 100);
+        }
+      }, 2000);
+    });
+    
     // Template personalizado para preview con footer social
     var PostPreview = createClass({
       render: function() {
