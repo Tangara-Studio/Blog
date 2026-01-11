@@ -5,9 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Content Manager</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 20px;
+    }
+    #debug {
+      background: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin: 20px 0;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  </style>
 </head>
 <body>
+  <div id="debug">
+    <strong>Debug Info:</strong><br>
+    CMS Loading...<br>
+  </div>
+  
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <script>
+    var debugEl = document.getElementById('debug');
+    
+    function log(msg) {
+      console.log(msg);
+      debugEl.innerHTML += msg + '<br>';
+    }
+    
+    // Monitorear eventos de mensaje para debug
+    window.addEventListener('message', function(e) {
+      log('📨 Message received:');
+      log('  Origin: ' + e.origin);
+      log('  Data: ' + (typeof e.data === 'string' ? e.data.substring(0, 100) : JSON.stringify(e.data).substring(0, 100)));
+    });
+    
+    // Verificar cuando CMS se inicializa
+    setTimeout(function() {
+      if (window.CMS) {
+        log('✅ Decap CMS loaded successfully');
+      } else {
+        log('❌ ERROR: Decap CMS failed to load');
+      }
+    }, 2000);
+    
+    log('Script loaded at: ' + new Date().toLocaleTimeString());
+  </script>
 </body>
 </html>
