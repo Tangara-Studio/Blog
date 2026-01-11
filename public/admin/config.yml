@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: tangara-studio/blog # Actualizar con tu repo
+  repo: Tangara-Studio/Blog
   branch: main
   base_url: https://api.netlify.com # Para OAuth
   auth_endpoint: auth
