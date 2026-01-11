@@ -4,37 +4,26 @@ description: Primer post del blog oficial de Tangara Studio. Aquí compartiremos
   devlogs, noticias y contenido sobre nuestros videojuegos.
 author: tangara-studio
 pubDate: 2025-01-04
-heroImage: /images/placeholder-hero.jpg
+heroImage: /images/uploads/6708cf33-c687-6dca-1ac1-57ebba229ac4.jpg
 tags:
   - anuncio
   - bienvenida
 draft: false
 language: es
 ---
-
 # ¡Bienvenidos!
 
 Este es el blog oficial de **Tangara Studio**, donde compartiremos:
 
-- 🎮 Devlogs de nuestros videojuegos
-- 🛠️ Artículos técnicos e ingeniería
-- 📢 Anuncios y actualizaciones
-- 🎨 Arte y diseño de nuestros proyectos
+* 🎮 Devlogs de nuestros videojuegos
+* 🛠️ Artículos técnicos e ingeniería
+* 📢 Anuncios y actualizaciones
+* 🎨 Arte y diseño de nuestros proyectos
 
-## Sobre este blog
+Si quieres formar parte de nuestra comunidad, te invitamos a seguirnos en nuestras redes sociales Instagram [@tangara.studio](http://instagram.com/tangara.studio/), [LinkedIn](https://www.linkedin.com/company/tangara-studio/) y cuenta de [X](https://x.com/TangaraStudio).
 
-Hemos construido esta plataforma con tecnología moderna y eficiente:
-- **Astro** para rendimiento óptimo
-- **Decap CMS** para edición fácil
-- **AWS Amplify** para hosting confiable
+También suscríbete a nuestro [Newsletter](https://mailchi.mp/tangara.studio/tangara-studio-subscription-page) y accede a nuestro grupo de [Discord](https://discord.gg/HT5Vwm8eYu).
 
-## ¿Qué viene?
-
-Mantente atento a:
-- Actualizaciones semanales de desarrollo
-- Behind the scenes de nuestros juegos
-- Tutoriales y recursos para desarrolladores
-
----
+- - -
 
 *¡Gracias por visitarnos! No olvides seguirnos en nuestras redes sociales.*
