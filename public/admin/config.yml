@@ -57,8 +57,9 @@ collections:
       - { label: "Descripción", name: "description", widget: "text" }
       - { label: "Autor", name: "author", widget: "select", options: ["tangara-studio", "jwilschrey", "dactrtr"], default: "tangara-studio", hint: "Para agregar más autores, edita src/data/authors.ts y este archivo" }
       - { label: "Fecha de Publicación", name: "pubDate", widget: "datetime" }
-      - { label: "Imagen Destacada", name: "heroImage", widget: "image" }
+      - { label: "Imagen Destacada", name: "heroImage", widget: "image", hint: "Tamaño ideal: 1200x500px (o 1200x630px). Mínimo: 800x400px. Formato: JPG optimizado o WebP. Peso: < 200KB" }
       - { label: "Tags", name: "tags", widget: "list", default: ["devlog"] }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Idioma / Language", name: "language", widget: "select", options: ["en", "es"], default: "en", hint: "Selecciona el idioma del post / Select the post language" }
+      - { label: "Footer Template", name: "footerTemplate", widget: "select", options: ["none", "cta", "newsletter", "share"], default: "none", hint: "Ninguno / Call to Action / Newsletter / Compartir en redes", required: false }
       - { label: "Contenido", name: "body", widget: "markdown" }

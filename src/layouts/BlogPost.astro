@@ -1,6 +1,9 @@
 ---
 import Layout from './Layout.astro';
 import AuthorCard from '../components/AuthorCard.astro';
+import CallToAction from '../components/footers/CallToAction.astro';
+import Newsletter from '../components/footers/Newsletter.astro';
+import SocialShare from '../components/footers/SocialShare.astro';
 import { type CollectionEntry } from 'astro:content';
 import { getAuthor } from '../data/authors';
 import { useTranslations, formatDate } from '../i18n/utils';
@@ -10,11 +13,12 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, description, author, pubDate, heroImage, tags, language } = post.data;
+const { title, description, author, pubDate, heroImage, tags, language, footerTemplate } = post.data;
 const authorData = getAuthor(author);
 const t = useTranslations(language);
 
 const formattedDate = formatDate(pubDate, language);
+const currentUrl = `https://blog.tangara.studio/blog/${post.slug}`;
 ---
 
 <Layout title={title} description={description} image={heroImage} article={true}>
@@ -51,6 +55,14 @@ const formattedDate = formatDate(pubDate, language);
     <div class="post-content content">
       <slot />
     </div>
+    
+    {footerTemplate && footerTemplate !== 'none' && (
+      <div class="content">
+        {footerTemplate === 'cta' && <CallToAction language={language} />}
+        {footerTemplate === 'newsletter' && <Newsletter language={language} />}
+        {footerTemplate === 'share' && <SocialShare language={language} title={title} url={currentUrl} />}
+      </div>
+    )}
     
     <footer class="post-footer content">
       <a href={language === 'en' ? '/' : '/es/'} class="back-link">{t('post.backToHome')}</a>

@@ -11,6 +11,7 @@ const blogCollection = defineCollection({
     tags: z.array(z.string()).default(['devlog']),
     draft: z.boolean().default(false),
     language: z.enum(['en', 'es']).default('en'),
+    footerTemplate: z.enum(['none', 'cta', 'newsletter', 'share']).default('none').optional(),
   }),
 });
 
