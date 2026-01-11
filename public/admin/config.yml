@@ -5,8 +5,8 @@ backend:
   base_url: https://94fnfek163.execute-api.us-east-1.amazonaws.com/oauth
   auth_endpoint: auth
 
-# Usar develop branch en ambiente de desarrollo
-local_backend: true
+# Local backend solo para desarrollo local
+# local_backend: true
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
