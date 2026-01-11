@@ -2,8 +2,8 @@ backend:
   name: github
   repo: Tangara-Studio/Blog
   branch: main
-  base_url: https://94fnfek163.execute-api.us-east-1.amazonaws.com/oauth
-  auth_endpoint: auth
+  base_url: https://94fnfek163.execute-api.us-east-1.amazonaws.com
+  auth_endpoint: oauth/auth
 
 # Local backend solo para desarrollo local
 # local_backend: true
