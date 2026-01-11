@@ -3,8 +3,8 @@ title: Bienvenidos al Blog de Tangara Studio
 description: Primer post del blog oficial de Tangara Studio. Aquí compartiremos
   devlogs, noticias y contenido sobre nuestros videojuegos.
 author: tangara-studio
-pubDate: 2025-01-04
-heroImage: /images/uploads/6708cf33-c687-6dca-1ac1-57ebba229ac4.jpg
+pubDate: 2026-01-11T14:17:00.000-03:00
+heroImage: /images/uploads/6708cf33-c687-6dca-1ac1-57ebba229ac4-2.jpg
 tags:
   - anuncio
   - bienvenida
