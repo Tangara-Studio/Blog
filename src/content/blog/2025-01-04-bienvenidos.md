@@ -10,6 +10,7 @@ tags:
   - bienvenida
 draft: false
 language: es
+footerTemplate: cta
 ---
 # ¡Bienvenidos!
 
@@ -23,7 +24,3 @@ Este es el blog oficial de **Tangara Studio**, donde compartiremos:
 Si quieres formar parte de nuestra comunidad, te invitamos a seguirnos en nuestras redes sociales Instagram [@tangara.studio](http://instagram.com/tangara.studio/), [LinkedIn](https://www.linkedin.com/company/tangara-studio/) y cuenta de [X](https://x.com/TangaraStudio).
 
 También suscríbete a nuestro [Newsletter](https://mailchi.mp/tangara.studio/tangara-studio-subscription-page) y accede a nuestro grupo de [Discord](https://discord.gg/HT5Vwm8eYu).
-
-- - -
-
-*¡Gracias por visitarnos! No olvides seguirnos en nuestras redes sociales.*
