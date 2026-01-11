@@ -17,6 +17,41 @@ collections:
     folder: "src/content/blog"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: ['pubDate', 'title', 'language', 'author']
+    view_filters:
+      - label: "Español"
+        field: language
+        pattern: 'es'
+      - label: "English"
+        field: language
+        pattern: 'en'
+      - label: "Tangara Studio"
+        field: author
+        pattern: 'tangara-studio'
+      - label: "jwilschrey"
+        field: author
+        pattern: 'jwilschrey'
+      - label: "dactrtr"
+        field: author
+        pattern: 'dactrtr'
+      - label: "Drafts"
+        field: draft
+        pattern: true
+      - label: "Published"
+        field: draft
+        pattern: false
+    view_groups:
+      - label: "Mes"
+        field: pubDate
+        pattern: '\d{4}-\d{2}'
+      - label: "Idioma"
+        field: language
+      - label: "Autor"
+        field: author
+      - label: "Año"
+        field: pubDate
+        pattern: '\d{4}'
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Descripción", name: "description", widget: "text" }
